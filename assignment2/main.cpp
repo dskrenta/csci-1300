@@ -26,6 +26,9 @@ int howMany(int population) {
 */
 
 void howLong(int seconds) {
+  if (seconds < 0) {
+    seconds = 0;
+  }
   int days = seconds / (24*60*60);
   seconds = seconds % (24*60*60);
   int hours = seconds / (60*60);
