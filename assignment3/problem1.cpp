@@ -26,7 +26,7 @@ void story1(void) {
   cout << "Enter a place: " << endl;
   cin >> place;
 
-  cout << "In the book War of the " << pluralNoun << ", the main character is an anonymous " << occupation << " who records the arrival of the " << animalName << "s in " << place << endl;
+  cout << "In the book War of the " << pluralNoun << ", the main character is an anonymous " << occupation << " who records the arrival of the " << animalName << "s in " << place << "." << endl;
 }
 
 /*
@@ -43,7 +43,7 @@ void story2(void) {
   cout << "Enter a state/country: " << endl;
   cin >> area;
 
-  cout << name << ", I;ve got a feeling we're not in " << area << " anymore." << endl;
+  cout << name << ", I've got a feeling we're not in " << area << " anymore." << endl;
 }
 
 /*
@@ -63,7 +63,7 @@ void story3(void) {
   cout << "Enter a verb: " << endl;
   cin >> verb;
 
-  cout << "Hello. My name is " << firstName << ". You killed my " << relative << ". Prepare to " << verb << endl;
+  cout << "Hello. My name is " << firstName << ". You killed my " << relative << ". Prepare to " << verb << "." << endl;
 }
 
 /*
@@ -87,13 +87,13 @@ void menu(void) {
       story3();
     }
     else if(input == "q") {
+      cout << "good bye" << endl;
       break;
     }
     else {
       cout << "Valid choice not selected" << endl;
     }
   }
-  cout << "good bye" << endl;
 }
 
 int main() {

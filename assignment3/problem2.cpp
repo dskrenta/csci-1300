@@ -22,7 +22,7 @@ float windChillCalculator(float t, float v) {
 */
 
 void printWindChill(float t, float lowWindSpeed, float highWindSpeed, float windSpeedStep) {
-  for(int i = lowWindSpeed; i <= highWindSpeed; i++) {
+  for(float i = lowWindSpeed; i <= highWindSpeed; i += windSpeedStep) {
     cout << "The wind chill is " << windChillCalculator(t, i) << " degrees F for an airtemperature of " << t << " degrees F and a wind speed of " << i << " mph." << endl;
   }
 }
