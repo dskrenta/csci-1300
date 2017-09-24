@@ -74,26 +74,23 @@ void story3(void) {
 void menu(void) {
   string input;
   while(input != "q") {
-    cout << "Which story would you like to play? Enter the number of the story​ ​(1,​ 2,​ or​ 3)​ or​ type​ ​q to​ quit:​ " << endl;
+    cout << "Which story would you like to play? Enter the number of the story (1, 2, or 3) or type q to quit: " << endl;
     cin >> input;
-
+    
     if(input == "1") {
       story1();
-    }
+    } 
     else if(input == "2") {
       story2();
-    }
+    } 
     else if(input == "3") {
       story3();
-    }
-    else if(input == "q") {
-      cout << "good bye" << endl;
-      break;
-    }
-    else {
-      cout << "Valid choice not selected" << endl;
+    } 
+    else if(input != "q") {
+      cout<<"Valid choice not selected."<<endl;
     }
   }
+  cout << "good bye" << endl;
 }
 
 int main() {
