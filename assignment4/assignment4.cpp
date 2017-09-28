@@ -1,7 +1,18 @@
+// Author: David Skrenta CS1300 Fall 2017
+// Recitation: 210 - Arcadia
+// Assignment 4
+// assignment4.cpp
+
 #include <iostream>
 #include <string>
 
 using namespace std;
+
+/*
+  Compares two strings together and calculates their similarity
+  Parameters: first sequence, second sequence
+  Returns: similarity score for the two sequences
+*/
 
 float similarityScore(string sequence1, string sequence2) {
   float sequence1Length = sequence1.length();
@@ -22,12 +33,18 @@ float similarityScore(string sequence1, string sequence2) {
   return (sequence1Length - mismatches) / sequence1Length;
 }
 
-int countMatches(string genome, string sequence1, float minScore) {
-  int matches = 0;
-  int sequence1Length = sequence1.length();
+/*
+  Counts all matches of a sequence in a genome with a minimun score consideration
+  Parameters: genome, sequence, minScore
+  Returns: all matches within the min score boundary
+*/
 
-  for (int pos = 0; pos < genome.length() - sequence1Length + 1; pos++) {
-    float score = similarityScore(genome.substr(pos, sequence1Length), sequence1);
+int countMatches(string genome, string sequence, float minScore) {
+  int matches = 0;
+  int sequenceLength = sequence.length();
+
+  for (int pos = 0; pos < genome.length() - sequenceLength + 1; pos++) {
+    float score = similarityScore(genome.substr(pos, sequenceLength), sequence);
     if (score >= minScore) {
       matches++;
     }
@@ -36,14 +53,17 @@ int countMatches(string genome, string sequence1, float minScore) {
   return matches;
 }
 
+/*
+  Finds the best match in terms of similarity for a genome and a sequence
+  Parameters: genome, sequence
+  Returns: best match
+*/
+
 float findBestMatch(string genome, string seq) {
   float bestMatch = 0.0;
-  int genomeLength = genome.length();
-  int seqLength = seq.length();
-  int pos = 0;
 
   for (int pos = 0; pos < genome.length(); pos++) {
-    float score = similarityScore(genome.substr(pos, seqLength), seq);
+    float score = similarityScore(genome.substr(pos, seq.length()), seq);
     if (score > bestMatch) {
       bestMatch = score;
     }
@@ -51,6 +71,12 @@ float findBestMatch(string genome, string seq) {
 
   return bestMatch;
 }
+
+/*
+  Compares three genomes and returns the index number of the one with the best match for a sequence
+  Parameters: first genome, second genome, third genome, sequence
+  Returns: best matching genome for given sequence
+*/
 
 int findBestGenome(string genome1, string genome2, string genome3, string seq) {
   float genome1Score = findBestMatch(genome1, seq);
@@ -69,4 +95,42 @@ int findBestGenome(string genome1, string genome2, string genome3, string seq) {
   else {
     return 0;
   }
+}
+
+/*
+  Calculates the complement sequence given a sequence of DNA
+  Parameters: sequence
+  Returns: complement sequence
+*/
+
+string complementSequence(string seq) {
+  string complementSeq = "";
+
+  for (int i = 0; i < seq.length(); i++) {
+    if (seq[i] == 65) {
+      complementSeq += "T";
+    }
+    else if (seq[i] == 67) {
+      complementSeq += "G";
+    }
+  }
+
+  return complementSeq;
+}
+
+/*
+  Calculates the reverse complement sequence given a sequence of DNA
+  Parameters: sequence
+  Returns: reverse complement sequence
+*/
+
+string reverseComplementSequence(string seq) {
+  string complementSeq = complementSequence(seq);
+  string reverseComponentSeq = "";
+
+  for (int i = complementSeq.length(); i > 0; i--) {
+    reverseComponentSeq += complementSeq[i];
+  }
+
+  return reverseComponentSeq;
 }

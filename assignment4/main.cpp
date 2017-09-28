@@ -1,3 +1,8 @@
+// Author: David Skrenta CS1300 Fall 2017
+// Recitation: 210 - Arcadia
+// Assignment 4
+// main.cpp
+
 #include <iostream>
 #include "assignment4.cpp"
 
@@ -8,20 +13,10 @@ int main() {
   string mouseDNA = "CGCAATTTTTACTTAATTCTTTTTCTTTTAATTCATATATTTTTAATATGTTTACTATTAATGGTTATCATTCACCATTTAACTATTTGTTATTTTGACGTCATTTTTTTCTATTTCCTCTTTTTTCAATTCATGTTTATTTTCTGTATTTTTGTTAAGTTTTCACAAGTCTAATATAATTGTCCTTTGAGAGGTTATTTGGTCTATATTTTTTTTTCTTCATCTGTATTTTTATGATTTCATTTAATTGATTTTCATTGACAGGGTTCTGCTGTGTTCTGGATTGTATTTTTCTTGTGGAGAGGAACTATTTCTTGAGTGGGATGTACCTTTGTTCTTG";
   string unkownDNA = "CGCATTTTTGCCGGTTTTCCTTTGCTGTTTATTCATTTATTTTAAACGATATTTATATCATCGGGTTTCATTCACTATTTTTCTTTTCGATAAATTTTTGTCAGCATTTTCTTTTACCTCTTCTTTCTGTTTATGTTAATTTTCTGTTTCTTAACCCAGTCTTCTCGATTCTTATCTACCGGACCTATTATAGGTCACAGGGTCTTGATGCTTTGGTTTTCATCTGCAAGAGTCTGACTTCCTGCTAATGCTGTTCTGTGTCAGGGTGCATCTGAGCACTGATGTGGAGTTTTCTTGTGGATATGAGCCATTCATAGTGTGGGATGTGCCATAGTTCATG";
 
-  /*
-  cout << similarityScore("hahasdf", "hahafdf") << endl;
-  cout << countMatches("hahahaha", "haha", 0.6) << endl;
-  cout << findBestMatch("hahshf", "ha") << endl;
-  cout << findBestGenome("hahc", "haha", "havr", "ha") << endl;
-
-  cout << similarityScore(humanDNA, humanDNA) << endl;
   cout << similarityScore(humanDNA, mouseDNA) << endl;
-  cout << similarityScore(humanDNA, unkownDNA) << endl;
-  */
-
-  // cout << similarityScore("ACGCACCC", "TAATATTG") << endl;
-
-  // cout << countMatches("TTTTTTT", "CCC", 0.00) << endl; // current 7, actual 5
-
-  cout << findBestGenome("GGAACACA", "CGATATGA", "GGAGTA", "CAATC") << endl; // current 0, actual 2
+  cout << countMatches(humanDNA, "GCC", 0.5) << endl;
+  cout << findBestMatch(mouseDNA, "ACT") << endl;
+  cout << findBestGenome("GGAACACA", "CGATATGA", "GGAGTA", "CAATC") << endl;
+  cout << complementSequence("GGAACACA") << endl;
+  cout << reverseComplementSequence("GGAACACA") << endl;
 }
