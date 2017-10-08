@@ -11,9 +11,11 @@ int main() {
   float array1[4] = {1.2, 1.3, 1.4, 1.5};
   int array2[4] = {1, 2, 3, 4};
   int array3[4] = {2, 3, 5, 7};
+  float array4[5] = {1, 2, 3, 4, 5};
 
   cout << sumArray(array1, 4) << endl;
   cout << search(array2, 4, 3) << endl;
   cout << calculateDifference(array2, array3, 4) << endl;
   cout << findMedian(array1, 4) << endl;
+  cout << findMedian(array4, 5) << endl;
 }
