@@ -122,11 +122,11 @@ float findMedian(float array[], int size) {
   float arrayCopy[size];
   copyArray(array, size, arrayCopy);
   sortArray(arrayCopy, size);
-  if (size % 2 == 0) {
-    median = (array[size / 2] + array[(size / 2) - 1]) / 2;
+  if (size % 2) {
+    median = arrayCopy[(size / 2)];
   }
   else {
-    median = array[size / 2];
+    median = (arrayCopy[size / 2] + arrayCopy[(size / 2) - 1]) / 2;
   }
   return median;
 }
