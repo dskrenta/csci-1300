@@ -44,6 +44,7 @@ int fillArray(string filename, float array[][5]) {
       }
       index++;
     }
+    file.close();
   }
   return index;
 }
@@ -74,6 +75,30 @@ float arrayStats(string filename, float numbers[][5]) {
   return sumRow1 + sumRow3 + sumCol1 + sumCol3;
 }
 
-void addBookRatings(string filenames, string users[], int ratings[][50]) {
+void addBookRatings(string filename, string users[], int ratings[][50]) {
+  string line;
+  ifstream file (filename);
+  if (file.is_open()) {
+    while (getline(file, line)) {
+      string tempArray[3];
+      split(line, ",", tempArray, 3);
+      int index = search(users, (sizeof(users) / sizeof(users[0]), tempArray[0]));
+      if (index != -1) {
 
+      }
+      else {
+
+      }
+    }
+    file.close();
+  }
+}
+
+int search(array, size, value) {
+  for (int i = 0; i < size; i++) {
+    if (array[i] == value) {
+      return i;
+    }
+  }
+  return -1;
 }
