@@ -1,9 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 using namespace std;
 
-void split(string str, string delimiter, string array, int size) {
+void split(string str, string delimiter, string array[], int size) {
   size_t pos = 0;
   int index = 0;
   while ((pos = str.find(delimiter)) != string::npos) {
@@ -14,9 +15,18 @@ void split(string str, string delimiter, string array, int size) {
   array[index] = str;
 }
 
+int search(string array[], int size, string value) {
+  for (int i = 0; i < size; i++) {
+    if (array[i] == value) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 float avgCharsPerLine(string filename) {
   string line;
-  ifstream file (filename);
+  ifstream file (filename.c_str());
   float lines = 0;
   float sum = 0;
   if (file.is_open()) {
@@ -32,14 +42,14 @@ float avgCharsPerLine(string filename) {
 int fillArray(string filename, float array[][5]) {
   int index = 0;
   string line;
-  ifstream file (filename);
+  ifstream file (filename.c_str());
   if (file.is_open()) {
     while (getline(file, line)) {
       if (index > 0) {
         string tempArray[5];
         split(line, ",", tempArray, 5);
-        for (for i = 0; i < 5; i++) {
-          array[index][i] = stof(tempArray[i]);
+        for (int i = 0; i < 5; i++) {
+          array[index - 1][i] = stof(tempArray[i]);
         }
       }
       index++;
@@ -76,29 +86,28 @@ float arrayStats(string filename, float numbers[][5]) {
 }
 
 void addBookRatings(string filename, string users[], int ratings[][50]) {
+  int usersIndex = 0;
   string line;
+  int lines = 0;
   ifstream file (filename);
   if (file.is_open()) {
     while (getline(file, line)) {
-      string tempArray[3];
-      split(line, ",", tempArray, 3);
-      int index = search(users, (sizeof(users) / sizeof(users[0]), tempArray[0]));
-      if (index != -1) {
-
+      if (lines > 0) {
+        string tempArray[3];
+        split(line, ",", tempArray, 3);
+        int index = search(users, 100, tempArray[0]);
+        int bookId = stoi(tempArray[1]);
+        int rating = stoi(tempArray[2]);
+        if (index == -1) {
+          users[usersIndex] = tempArray[0];
+          ratings[usersIndex][bookId] = rating;
+          usersIndex++;
+        }
+        else {
+          ratings[usersIndex][bookId] = rating;
+        }
       }
-      else {
-
-      }
-    }
-    file.close();
-  }
-}
-
-int search(array, size, value) {
-  for (int i = 0; i < size; i++) {
-    if (array[i] == value) {
-      return i;
+      lines++;
     }
   }
-  return -1;
 }
