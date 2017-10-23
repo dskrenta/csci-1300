@@ -51,6 +51,7 @@ int main() {
   int ratings[100][50];
   addBookRatings("part4.txt", users, ratings);
   for (int i = 0; i < 50; i++) {
+    cout << users[i] << ": ";
     for (int j = 0; j < 50; j++) {
       cout << ratings[i][j] << " ";
     }

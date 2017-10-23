@@ -56,9 +56,29 @@ int fillArray(string filename, float array[][5]) {
     }
     file.close();
   }
-  return index;
+  return index - 1;
 }
 
+float arrayStats(string filename, float numbers[][5]) {
+  int lines = fillArray(filename, numbers);
+  float rowSum, colSum = 0;
+  for (int i = 0; i < lines; i++) {
+    for (int j = 0; j < 5; j++) {
+      if (j % 2 != 0) {
+        colSum += numbers[i][j];
+      }
+      if (i % 2 != 0) {
+        rowSum += numbers[i][j];
+      }
+    }
+  }
+  rowSum /= (float)lines;
+  colSum /= 5;
+  cout << lines << endl;
+  return rowSum + colSum;
+}
+
+/*
 float arrayStats(string filename, float numbers[][5]) {
   fillArray(filename, numbers);
   float sumRow1, sumRow3, sumCol1, sumCol3 = 0;
@@ -84,8 +104,15 @@ float arrayStats(string filename, float numbers[][5]) {
   sumCol3 /= 5;
   return sumRow1 + sumRow3 + sumCol1 + sumCol3;
 }
+*/
 
 void addBookRatings(string filename, string users[], int ratings[][50]) {
+  for (int i = 0; i < 100; i++) {
+    for (int j = 0; j < 50; j++) {
+      ratings[i][j] = 0;
+    }
+  }
+
   int usersIndex = 0;
   string line;
   int lines = 0;
@@ -104,7 +131,7 @@ void addBookRatings(string filename, string users[], int ratings[][50]) {
           usersIndex++;
         }
         else {
-          ratings[usersIndex][bookId] = rating;
+          ratings[index][bookId] = rating;
         }
       }
       lines++;
