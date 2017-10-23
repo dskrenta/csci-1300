@@ -1,8 +1,18 @@
+// Author: David Skrenta CS1300 Fall 2017
+// Recitation: 210 - Arcadia
+// Assignment 6
+// Assignment6.cpp
+
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
 using namespace std;
+
+/*
+  Splits string into array based on delimiter
+  Parameters: string, delimeter, array, size
+*/
 
 void split(string str, string delimiter, string array[], int size) {
   size_t pos = 0;
@@ -15,6 +25,12 @@ void split(string str, string delimiter, string array[], int size) {
   array[index] = str;
 }
 
+/*
+  Searches array for target value
+  Parameters: array, size, target value
+  Returns: index of target value or -1 if not found
+*/
+
 int search(string array[], int size, string value) {
   for (int i = 0; i < size; i++) {
     if (array[i] == value) {
@@ -23,6 +39,12 @@ int search(string array[], int size, string value) {
   }
   return -1;
 }
+
+/*
+  Calculates the average number of characters per line from a input file
+  Parameters: filename
+  Returns: avgerage characters per line
+*/
 
 float avgCharsPerLine(string filename) {
   string line;
@@ -38,6 +60,12 @@ float avgCharsPerLine(string filename) {
   }
   return sum / lines;
 }
+
+/*
+  Reads a file and inserts the values separated by commmas into a 2D array
+  Parameters: filename, 2D array
+  Returns: sum
+*/
 
 int fillArray(string filename, float array[][5]) {
   int index = 0;
@@ -59,6 +87,12 @@ int fillArray(string filename, float array[][5]) {
   return index - 1;
 }
 
+/*
+  Caclulates the summed mean for each of the odd columns and rows
+  Parameters: filename, array
+  Returns: the summed mean
+*/
+
 float arrayStats(string filename, float numbers[][5]) {
   int lines = fillArray(filename, numbers);
   float rowSum, colSum = 0;
@@ -79,31 +113,8 @@ float arrayStats(string filename, float numbers[][5]) {
 }
 
 /*
-float arrayStats(string filename, float numbers[][5]) {
-  fillArray(filename, numbers);
-  float sumRow1, sumRow3, sumCol1, sumCol3 = 0;
-  for (int i = 0; i < 5; i++) {
-    for (int j = 0; j < 5; j++) {
-      if (i == 1) {
-        sumRow1 += numbers[i][j];
-      }
-      else if (i == 3) {
-        sumRow3 += numbers[i][j];
-      }
-      if (j == 1) {
-        sumCol1 += numbers[i][j];
-      }
-      else if (j == 3) {
-        sumCol3 += numbers[i][j];
-      }
-    }
-  }
-  sumRow1 /= 5;
-  sumRow3 /= 5;
-  sumCol1 /= 5;
-  sumCol3 /= 5;
-  return sumRow1 + sumRow3 + sumCol1 + sumCol3;
-}
+  Parses a file with book ratings, parses users from file, inserts users, book id, and rating into provided 2D array
+  Parameters: filename, users array, ratings array
 */
 
 void addBookRatings(string filename, string users[], int ratings[][50]) {

@@ -1,3 +1,8 @@
+// Author: David Skrenta CS1300 Fall 2017
+// Recitation: 210 - Arcadia
+// Assignment 6
+// main.cpp
+
 #include <iostream>
 #include <string>
 #include "Assignment6.cpp"
