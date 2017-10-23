@@ -65,4 +65,24 @@ int main() {
   for (int i = 0; i < 15; i++) {
     cout << users[i] << endl;
   }
+
+  // parseFileInto3DArray test
+  int array[10][10][10];
+  for (int i = 0; i < 10; i++) {
+    for (int j = 0; j < 10; j++) {
+      for (int k = 0; k < 10; k++) {
+        array[i][j][k] = 0;
+      }
+    }
+  }
+  parseFileInto3DArray("3dtest.txt", array);
+  for (int i = 0; i < 10; i++) {
+    for (int j = 0; j < 10; j++) {
+      for (int k = 0; k < 10; k++) {
+        cout << array[i][j][k] << " ";
+      }
+      cout << endl;
+    }
+    cout << endl;
+  }
 }

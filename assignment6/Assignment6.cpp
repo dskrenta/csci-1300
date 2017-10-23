@@ -94,22 +94,30 @@ int fillArray(string filename, float array[][5]) {
 */
 
 float arrayStats(string filename, float numbers[][5]) {
-  int lines = fillArray(filename, numbers);
-  float rowSum, colSum = 0;
-  for (int i = 0; i < lines; i++) {
-    for (int j = 0; j < 5; j++) {
-      if (j % 2 != 0) {
-        colSum += numbers[i][j];
+  string line;
+  ifstream file (filename.c_str());
+  int lineNum = 0;
+  float colSum, rowSum, rowMean, colMean = 0;
+  if (file.is_open()) {
+    while (getline(file, line)) {
+      if (lineNum > 0) {
+        string tempArray[5];
+        split(line, ",", tempArray, 5);
+        colSum += stof(tempArray[1]);
+        colSum += stof(tempArray[3]);
+        if (lineNum % 2 == 0) {
+          for (int i = 0; i < 5; i++) {
+            rowSum += stof(tempArray[i]);
+          }
+        }
       }
-      if (i % 2 != 0) {
-        rowSum += numbers[i][j];
-      }
+      lineNum++;
     }
+    file.close();
   }
-  rowSum /= (float)lines;
-  colSum /= 5;
-  cout << lines << endl;
-  return rowSum + colSum;
+  rowMean = rowSum / 5;
+  colMean = colSum / (lineNum - 1);
+  return colMean + rowMean;
 }
 
 /*
@@ -123,7 +131,6 @@ void addBookRatings(string filename, string users[], int ratings[][50]) {
       ratings[i][j] = 0;
     }
   }
-
   int usersIndex = 0;
   string line;
   int lines = 0;
@@ -147,5 +154,35 @@ void addBookRatings(string filename, string users[], int ratings[][50]) {
       }
       lines++;
     }
+    file.close();
+  }
+}
+
+/*
+  Parses a file into a 3D array
+  Parameters: filename, array
+*/
+
+void parseFileInto3DArray(string filename, int array[][10][10]) {
+  string line;
+  int currentLine = 0;
+  ifstream file (filename);
+  if (file.is_open()) {
+    while (getline(file, line)) {
+      if (currentLine > 0) {
+        string parseArray[4];
+        split(line, ",", parseArray, 4);
+        int id = stoi(parseArray[0]);
+        int x = stoi(parseArray[1]);
+        int y = stoi(parseArray[2]);
+        int velocity = stoi(parseArray[3]);
+        array[id][x][y] = velocity;
+      }
+      currentLine++;
+    }
+    file.close();
+  }
+  else {
+    cout << "Failed to open file." << endl;
   }
 }
