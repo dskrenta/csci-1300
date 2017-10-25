@@ -2,12 +2,12 @@
 using namespace std;
 
 class robot {
-  public:
-    Robot() {
+    public:
+        Robot() {
 
-    }
+        }
 
-    ~Robot() {
+        ~Robot() {
 
-    }
+        }
 }

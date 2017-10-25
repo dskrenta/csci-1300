@@ -1,33 +1,33 @@
 #include "battleShip.h"
 
 battleShip::battleShip(string shipName) {
-  name = shipName;
+    name = shipName;
 }
 
 battleShip::~battleShip() {
-  // letting compiler handle deconstruction of the class
+    // letting compiler handle deconstruction of the class
 }
 
 void battleShip::setShipName(string shipName) {
-  name = shipName;
+    name = shipName;
 }
 
 string battleShip::getShipName() {
-  return name;
+    return name;
 }
 
 void battleShip::setSize(int shipSize) {
-  size = shipSize;
+    size = shipSize;
 }
 
 int battleShip::getSize() {
-  return size;
+    return size;
 }
 
 void battleShip::recordHit() {
-  hits++;
+    hits++;
 }
 
 bool battleShip::isSunk() {
-  return hits >= size ? true : false;
+    return hits >= size ? true : false;
 }

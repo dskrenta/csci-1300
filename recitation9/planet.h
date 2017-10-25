@@ -22,7 +22,7 @@ class planet {
 		float getOrbitPeriod();
 
 	private:
-		string name;
+	    string name;
 		float radius;
 	 	float distance;
 };
