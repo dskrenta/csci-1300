@@ -86,7 +86,7 @@ string SpellChecker::repair(string sentence) {
     lowerNoPunctuation(sentence, ".?-/,!(){}[]_:;<>");
     size_t pos = 0;
     map<string, string>::iterator it;
-    while ((pos = str.find(' ') != string::npos)) {
+    while ((pos = sentence.find(' ') != string::npos)) {
         string token = str.substr(0, pos);
         if (search(token, validWords, 10000) != -1) {
             repaired += token;
