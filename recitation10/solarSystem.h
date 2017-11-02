@@ -1,3 +1,8 @@
+// Author: David Skrenta CS1300 Fall 2017
+// Recitation: 210 - Arcadia
+// Recitation 10
+// solarSystem.h
+
 #ifndef SOLAR_SYSTEM_H
 #define SOLAR_SYSTEM_H
 

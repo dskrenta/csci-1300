@@ -1,3 +1,8 @@
+// Author: David Skrenta CS1300 Fall 2017
+// Recitation: 210 - Arcadia
+// Recitation 10
+// planet.cpp
+
 #include "planet.h"
 
 planet::planet(){

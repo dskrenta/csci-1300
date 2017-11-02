@@ -1,3 +1,8 @@
+// Author: David Skrenta CS1300 Fall 2017
+// Recitation: 210 - Arcadia
+// Recitation 10
+// SolarSystem_main.cpp
+
 #include <iostream>
 #include "planet.h"
 #include "solarSystem.h"
@@ -23,11 +28,13 @@ using namespace std;
 */
 void compareRadii(solarSystem mySolarSystem, int num_of_planets) {
         // Logic for 2 goes here
-        for (int i = 1; i <= num_of_planets; i++) {
-            planet planet1 = mySolarSystem.getPlanet(i - 1);
-            planet planet2 = mySolarSystem.getPlanet(i);
-            cout << "Radius difference between planet " << planet1.getName() << " and planet "
-            << planet2.getName() << " is => " << mySolarSystem.radiusDifference(planet1, planet2) << endl;
+        for (int i = 0; i < num_of_planets; i++) {
+            for (int j = i + 1; j < num_of_planets; j++) {
+                planet planet1 = mySolarSystem.getPlanet(i);
+                planet planet2 = mySolarSystem.getPlanet(j);
+                cout << "Radius difference between planet " << planet1.getName() << " and planet "
+                << planet2.getName() << " is => " << mySolarSystem.radiusDifference(planet1, planet2) << endl;
+            }
         }
 }
 
