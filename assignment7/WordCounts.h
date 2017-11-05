@@ -8,6 +8,10 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+#include <sstream>
+#include <map>
+#include <algorithm>
 
 using namespace std;
 
@@ -22,8 +26,9 @@ class WordCounts {
         int mostTimes(string[], int[], int);
 
     private:
-        string words[10000];
-        int counts[10000];
-        int index = 0;
+        string lowerNoPunctuation(string, string);
+        static bool sortByFrequency(const pair <string, int> &a, const pair <string, int> &b);
+
+        map <string, int> wordCounts;
 };
 #endif // WORD_COUNTS_H

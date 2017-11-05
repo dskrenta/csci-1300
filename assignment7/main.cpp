@@ -5,11 +5,12 @@
 
 #include <iostream>
 #include "SpellChecker.h"
-// #include "WordCounts.h"
+#include "WordCounts.h"
 
 using namespace std;
 
 int main() {
+    /*
     SpellChecker spellCheck("English", "VALID_WORDS_3000.txt", "MISSPELLED.txt");
     spellCheck.setStartMarker('~');
     spellCheck.setEndMarker('~');
@@ -18,4 +19,23 @@ int main() {
     cout << spellCheck.repair("ahsjdklfha") << endl;
     cout << spellCheck.repair("tomor is another day!") << endl;
     cout << spellCheck.repair("Teh brown asdhf jumped.") << endl;
+    */
+
+    WordCounts wordCounts;
+    wordCounts.tallyWords("the brown fox.");
+    wordCounts.tallyWords("the red fox.");
+    wordCounts.tallyWords("teh blue cat.");
+
+    cout << wordCounts.getTally("the") << endl;
+    cout << wordCounts.getTally("brown") << endl;
+    cout << wordCounts.getTally("fox") << endl;
+    cout << wordCounts.getTally("red") << endl;
+    cout << wordCounts.getTally("blue") << endl;
+    cout << wordCounts.getTally("cat") << endl;
+    cout << wordCounts.getTally("teh") << endl;
+
+    string words[10];
+    int counts[10];
+
+    cout << wordCounts.mostTimes(words, counts, 5) << endl;
 }
