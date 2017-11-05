@@ -29,7 +29,15 @@ void WordCounts::tallyWords(string sentence) {
 }
 
 int WordCounts::getTally(string word) {
-    return wordCounts.at(word);
+    map <string, int>::iterator it;
+    it = wordCounts.find(word);
+    if (it != wordCounts.end()) {
+        return it->second;
+    }
+    else {
+        return 0;
+    }
+    // return wordCounts.at(word);
 }
 
 void WordCounts::resetTally() {
@@ -43,7 +51,7 @@ int WordCounts::mostTimes(string words[], int counts[], int n) {
     int maxFrequency = 0;
     vector <pair<string, int>> tempWords(wordCounts.begin(), wordCounts.end());
     sort(tempWords.begin(), tempWords.end(), WordCounts::sortByFrequency);
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < tempWords.size(); i++) {
         pair <string, int> wordCountPair = tempWords.at(i);
         words[i] = wordCountPair.first;
         counts[i] = wordCountPair.second;

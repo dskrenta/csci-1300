@@ -28,7 +28,6 @@ class SpellChecker {
         char getStartMarker();
         char getEndMarker();
         string repair(string);
-        void repairFile(string, string);
 
         string language;
 

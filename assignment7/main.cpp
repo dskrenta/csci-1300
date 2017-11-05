@@ -18,6 +18,7 @@ int main() {
     cout << spellCheck.repair("ahsjdklfha") << endl;
     cout << spellCheck.repair("tomor is another day!") << endl;
     cout << spellCheck.repair("Teh brown asdhf jumped.") << endl;
+    cout << spellCheck.repair("Hel'lo, my na!me is dav!i.d") << endl;
 
     WordCounts wordCounts;
     wordCounts.tallyWords("the brown fox.");

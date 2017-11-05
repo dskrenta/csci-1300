@@ -36,7 +36,6 @@ bool SpellChecker::readValidWords(string filename) {
         return true;
     }
     else {
-        cout << "Could not open file: " << filename << endl;
         return false;
     }
 }
@@ -48,13 +47,12 @@ bool SpellChecker::readCorrectedWords(string filename) {
         while (getline(file, line)) {
             string parsed[2];
             split(line, '\t', parsed, 2);
-            corrections.insert(pair<string, string>(parsed[0], parsed[1]));
+            corrections.insert(pair <string, string>(parsed[0], parsed[1]));
         }
         file.close();
         return true;
     }
     else {
-        cout << "Could not open file: " << filename << endl;
         return false;
     }
 }
@@ -82,7 +80,7 @@ string SpellChecker::repair(string sentence) {
     string normalized = lowerNoPunctuation(sentence, ".?-/,!(){}[]_:;<>");
     string token;
     stringstream ss(normalized);
-    map<string, string>::iterator it;
+    map <string, string>::iterator it;
     while (ss >> token) {
         if (search(token, validWords, 10000) != -1) {
             repaired += token;
@@ -96,9 +94,6 @@ string SpellChecker::repair(string sentence) {
         repaired += " ";
     }
     return repaired;
-}
-
-void SpellChecker::repairFile(string inputFilename, string outputFilename) {
 }
 
 int SpellChecker::search(string target, string array[], int size) {
@@ -120,7 +115,7 @@ string SpellChecker::lowerNoPunctuation(string str, string punch) {
         else {
             bool isPunch = false;
             for (int j = 0; j < punch.length(); j++) {
-                if (str[i] == punch[j]) {
+                if (str[i] == punch[j] && (i == 0 || i + 1 == str.length() || str[i + 1] == ' ' || str[i - 1] == ' ')) {
                     isPunch = true;
                     break;
                 }
