@@ -15,25 +15,25 @@ using namespace std;
 class SpellChecker {
     public:
         SpellChecker();
-        SpellChecker(string inputLanguage);
-        SpellChecker(string inputLanguage, string correctSpellingFilename, string incorrectSpellingFilename);
+        SpellChecker(string);
+        SpellChecker(string, string, string);
         ~SpellChecker();
 
-        bool readValidWords(string filename);
-        bool readCorrectedWords(string filename);
-        bool setStartMarker(char begin);
-        bool setEndMarker(char end);
+        bool readValidWords(string);
+        bool readCorrectedWords(string);
+        bool setStartMarker(char);
+        bool setEndMarker(char);
         char getStartMarker();
         char getEndMarker();
-        string repair(string sentence);
-        void repairFile(string inputFilename, string outputFilename);
+        string repair(string);
+        void repairFile(string, string);
 
         string language;
 
     private:
-        int search(string word, string array[], int size);
-        string lowerNoPunctuation(string str, string punch);
-        void split(string str, char delimiter, string words[], int size);
+        int search(string, string[], int);
+        string lowerNoPunctuation(string, string);
+        void split(string, char, string[], int);
 
         char startMarker;
         char endMarker;

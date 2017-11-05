@@ -5,6 +5,14 @@
 
 #include <iostream>
 #include "SpellChecker.h"
-#include "WordCounts.h"
+// #include "WordCounts.h"
 
 using namespace std;
+
+int main() {
+    SpellChecker spellCheck("English", "VALID_WORDS_3000.txt", "MISSPELLED.txt");
+    spellCheck.setStartMarker('~');
+    spellCheck.setEndMarker('~');
+    cout << spellCheck.repair("todayy") << endl;
+    cout << spellCheck.repair("todayy, is teh day!") << endl;
+}

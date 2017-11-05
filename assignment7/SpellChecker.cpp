@@ -5,20 +5,21 @@
 
 #include "SpellChecker.h"
 
-#include <ifstream>
+#include <fstream>
 #include <string>
 #include <map>
+#include <sstream>
 
 SpellChecker::SpellChecker() {
 
 }
 
 SpellChecker::SpellChecker(string inputLanguage) {
-    language = inputLangauge;
+    language = inputLanguage;
 }
 
 SpellChecker::SpellChecker(string inputLanguage, string correctSpellingFilename, string incorrectSpellingFilename) {
-    language = inputLangauge;
+    language = inputLanguage;
     readValidWords(correctSpellingFilename);
     readCorrectedWords(incorrectSpellingFilename);
 }
@@ -27,7 +28,7 @@ SpellChecker::~SpellChecker() {
     // letting compiler handle deconstruction of the class
 }
 
-bool SellChecker::readValidWords(string filename) {
+bool SpellChecker::readValidWords(string filename) {
     ifstream file (filename);
     string line;
     int index = 0;
@@ -73,7 +74,7 @@ bool SpellChecker::setEndMarker(char end) {
     return true;
 }
 
-char SellChecker::getStartMarker() {
+char SpellChecker::getStartMarker() {
     return startMarker;
 }
 
@@ -83,26 +84,26 @@ char SpellChecker::getEndMarker() {
 
 string SpellChecker::repair(string sentence) {
     string repaired = "";
-    lowerNoPunctuation(sentence, ".?-/,!(){}[]_:;<>");
-    size_t pos = 0;
+    string normalized = lowerNoPunctuation(sentence, ".?-/,!(){}[]_:;<>");
+    string token;
+    stringstream ss(normalized);
     map<string, string>::iterator it;
-    while ((pos = sentence.find(' ') != string::npos)) {
-        string token = str.substr(0, pos);
+    while (ss >> token) {
         if (search(token, validWords, 10000) != -1) {
             repaired += token;
         }
-        else if ((it = corrections.find(token)) != corrections.end) {
+        else if ((it = corrections.find(token)) != corrections.end()) {
             repaired += it->second;
         }
         else {
             repaired += startMarker + token + endMarker;
         }
+        repaired += " ";
     }
     return repaired;
 }
 
-string SpellChecker::repairFile(string inputFilename, string outputFilename) {
-
+void SpellChecker::repairFile(string inputFilename, string outputFilename) {
 }
 
 int SpellChecker::search(string word, string array[], int size) {
@@ -126,6 +127,7 @@ string SpellChecker::lowerNoPunctuation(string str, string punch) {
             for (int j = 0; j < punch.length(); j++) {
                 if (str[i] == punch[j]) {
                     isPunch = true;
+                    break;
                 }
             }
             if (!isPunch) {
@@ -139,9 +141,11 @@ string SpellChecker::lowerNoPunctuation(string str, string punch) {
 
 void SpellChecker::split(string str, char delimiter, string words[], int size) {
     size_t pos = 0;
+    int index = 0;
     while ((pos = str.find(delimiter)) != string::npos) {
         words[index] = str.substr(0, pos);
         str.erase(0, pos + 1);
+        index++;
     }
     words[index] = str;
 }
