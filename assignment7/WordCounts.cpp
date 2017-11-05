@@ -5,13 +5,27 @@
 
 #include "WordCounts.h"
 
+/*
+    Empty constructor for WordCounts class
+*/
+
 WordCounts::WordCounts() {
 
 }
 
+/*
+    Destructor for WordCounts class
+*/
+
 WordCounts::~WordCounts() {
     // letting compiler handle deconstruction of the class
 }
+
+/*
+    Counts words in sentence and adds them to the wordCounts map
+    If words exists in map, increments count
+    Parameters: sentence
+*/
 
 void WordCounts::tallyWords(string sentence) {
     string normalized = lowerNoPunctuation(sentence, ".?-/,!(){}[]_:;<>");
@@ -28,6 +42,12 @@ void WordCounts::tallyWords(string sentence) {
     }
 }
 
+/*
+    Gets tally for given word from wordCounts map
+    Parameters: word
+    Returns: tally or 0 if word does not exist in map
+*/
+
 int WordCounts::getTally(string word) {
     map <string, int>::iterator it;
     it = wordCounts.find(word);
@@ -37,8 +57,11 @@ int WordCounts::getTally(string word) {
     else {
         return 0;
     }
-    // return wordCounts.at(word);
 }
+
+/*
+    Resets all word counts to 0
+*/
 
 void WordCounts::resetTally() {
     map <string, int>::iterator it;
@@ -46,6 +69,12 @@ void WordCounts::resetTally() {
         it->second = 0;
     }
 }
+
+/*
+    Populates words and counts array with the highest n counts
+    Parameters: words array, counts array, n
+    Returns: max frequency
+*/
 
 int WordCounts::mostTimes(string words[], int counts[], int n) {
     int maxFrequency = 0;
@@ -60,9 +89,21 @@ int WordCounts::mostTimes(string words[], int counts[], int n) {
     return maxFrequency;
 }
 
+/*
+    Sorts a vector of pairs <string, int> based on the second value in the pair (int)
+    Parameters: reference to pair a, reference to pair b
+    Returns: boolean based on which int is higher
+*/
+
 bool WordCounts::sortByFrequency(const pair <string, int> &a, const pair <string, int> &b) {
     return (a.second > b.second);
 }
+
+/*
+    Converts string to lowercase equivalent and removes punctation
+    Parameters: str, punch
+    Returns: normalized string
+*/
 
 string WordCounts::lowerNoPunctuation(string str, string punch) {
     string normalized = "";

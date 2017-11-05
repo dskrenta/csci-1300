@@ -5,13 +5,27 @@
 
 #include "SpellChecker.h"
 
+/*
+    Empty constructor for SpellCheck class
+*/
+
 SpellChecker::SpellChecker() {
 
 }
 
+/*
+    Constructor for SpellCheck class with input language specification
+    Parameters: inputLanguage
+*/
+
 SpellChecker::SpellChecker(string inputLanguage) {
     language = inputLanguage;
 }
+
+/*
+    Constructor for SpellCheck class with input language, correct spelling filename, and incorrect spelling filename specification
+    Parameters: inputLanguage, correctSpellingFilename, incorrectSpellingFilename
+*/
 
 SpellChecker::SpellChecker(string inputLanguage, string correctSpellingFilename, string incorrectSpellingFilename) {
     language = inputLanguage;
@@ -19,9 +33,19 @@ SpellChecker::SpellChecker(string inputLanguage, string correctSpellingFilename,
     readCorrectedWords(incorrectSpellingFilename);
 }
 
+/*
+    Destructor for SpellCheck class
+*/
+
 SpellChecker::~SpellChecker() {
     // letting compiler handle deconstruction of the class
 }
+
+/*
+    Reads valid words into valid words array
+    Parameters: filename
+    Returns: boolean value based on successful file read
+*/
 
 bool SpellChecker::readValidWords(string filename) {
     ifstream file (filename);
@@ -40,6 +64,12 @@ bool SpellChecker::readValidWords(string filename) {
     }
 }
 
+/*
+    Reads corrected words into a map
+    Parameters: filename
+    Returns: boolean value based on successful file read
+*/
+
 bool SpellChecker::readCorrectedWords(string filename) {
     ifstream file (filename);
     string line;
@@ -57,23 +87,51 @@ bool SpellChecker::readCorrectedWords(string filename) {
     }
 }
 
+/*
+    Sets start marker for SpellCheck class
+    Parameters: begin
+    Returns: true
+*/
+
 bool SpellChecker::setStartMarker(char begin) {
     startMarker = begin;
     return true;
 }
+
+/*
+    Sets end marker for SpellCheck class
+    Parameters: end
+    Returns: true
+*/
 
 bool SpellChecker::setEndMarker(char end) {
     endMarker = end;
     return true;
 }
 
+/*
+    Gets start marker for SpellCheck class
+    Returns: start marker
+*/
+
 char SpellChecker::getStartMarker() {
     return startMarker;
 }
 
+/*
+    Gets end marker for SpellCheck class
+    Returns: end market
+*/
+
 char SpellChecker::getEndMarker() {
     return endMarker;
 }
+
+/*
+    Repairs a normalized string given the valid words array, and corrected words map
+    Parameters: sentence
+    Returns: repaired sentence
+*/
 
 string SpellChecker::repair(string sentence) {
     string repaired = "";
@@ -96,6 +154,12 @@ string SpellChecker::repair(string sentence) {
     return repaired;
 }
 
+/*
+    Searches for a target value in array
+    Parameters: target, array, size
+    Returns: -1 if not found, positive index if found
+*/
+
 int SpellChecker::search(string target, string array[], int size) {
     for (int i = 0; i < size; i++) {
         if (array[i] == target) {
@@ -104,6 +168,13 @@ int SpellChecker::search(string target, string array[], int size) {
     }
     return -1;
 }
+
+/*
+    Removes punctation from a string
+    Note: Does not remove punctation inside a word
+    Parameters: str, punch
+    Returns: normalized string
+*/
 
 string SpellChecker::lowerNoPunctuation(string str, string punch) {
     string normalized = "";
@@ -128,6 +199,11 @@ string SpellChecker::lowerNoPunctuation(string str, string punch) {
 
     return normalized;
 }
+
+/*
+    Splits string into array based on delimiter
+    Parameters: str, delimiter, words array, size
+*/
 
 void SpellChecker::split(string str, char delimiter, string words[], int size) {
     size_t pos = 0;
