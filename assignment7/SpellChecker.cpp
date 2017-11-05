@@ -89,6 +89,7 @@ string SpellChecker::repair(string sentence) {
     stringstream ss(normalized);
     map<string, string>::iterator it;
     while (ss >> token) {
+        cout << "token: " << token << endl;
         if (search(token, validWords, 10000) != -1) {
             repaired += token;
         }
@@ -106,9 +107,9 @@ string SpellChecker::repair(string sentence) {
 void SpellChecker::repairFile(string inputFilename, string outputFilename) {
 }
 
-int SpellChecker::search(string word, string array[], int size) {
+int SpellChecker::search(string target, string array[], int size) {
     for (int i = 0; i < size; i++) {
-        if (array[i] == word) {
+        if (array[i] == target) {
             return i;
         }
     }

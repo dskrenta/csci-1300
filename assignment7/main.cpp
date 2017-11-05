@@ -15,4 +15,7 @@ int main() {
     spellCheck.setEndMarker('~');
     cout << spellCheck.repair("todayy") << endl;
     cout << spellCheck.repair("todayy, is teh day!") << endl;
+    cout << spellCheck.repair("ahsjdklfha") << endl;
+    cout << spellCheck.repair("tomor is another day!") << endl;
+    cout << spellCheck.repair("Teh brown asdhf jumped.") << endl;
 }
