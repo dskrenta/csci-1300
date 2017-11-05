@@ -120,7 +120,7 @@ char SpellChecker::getStartMarker() {
 
 /*
     Gets end marker for SpellCheck class
-    Returns: end market
+    Returns: end marker
 */
 
 char SpellChecker::getEndMarker() {
