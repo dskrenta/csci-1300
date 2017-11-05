@@ -45,7 +45,6 @@ int WordCounts::mostTimes(string words[], int counts[], int n) {
     sort(tempWords.begin(), tempWords.end(), WordCounts::sortByFrequency);
     for (int i = 0; i < n; i++) {
         pair <string, int> wordCountPair = tempWords.at(i);
-        cout << wordCountPair.first << ", " << wordCountPair.second << endl;
         words[i] = wordCountPair.first;
         counts[i] = wordCountPair.second;
         if (i == 0) maxFrequency = wordCountPair.second;

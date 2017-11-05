@@ -5,11 +5,6 @@
 
 #include "SpellChecker.h"
 
-#include <fstream>
-#include <string>
-#include <map>
-#include <sstream>
-
 SpellChecker::SpellChecker() {
 
 }
@@ -89,7 +84,6 @@ string SpellChecker::repair(string sentence) {
     stringstream ss(normalized);
     map<string, string>::iterator it;
     while (ss >> token) {
-        cout << "token: " << token << endl;
         if (search(token, validWords, 10000) != -1) {
             repaired += token;
         }
