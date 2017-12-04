@@ -25,7 +25,8 @@ def convert_seconds():
     Converts seconds to days, hours, minutes, seconds format based on seconds from user input
     '''
 
-    total_seconds = input("Enter the number of seconds you want to convert?")
+    input_seconds = raw_input()
+    total_seconds = int(input_seconds)
 
     if total_seconds < 0:
         total_seconds = 0
@@ -37,7 +38,7 @@ def convert_seconds():
     minutes = total_seconds / 60
     seconds = total_seconds % 60
 
-    print str(total_seconds) + " corresponds to: " + str(days) + " days, " + str(hours) + " hours, " + str(minutes) + " minutes, " + str(seconds) + " seconds."
+    print input_seconds + " corresponds to: " + str(days) + " days, " + str(hours) + " hours, " + str(minutes) + " minutes, " + str(seconds) + " seconds."
 
 def generate_story(params):
     '''
@@ -54,7 +55,10 @@ def generate_story(params):
     for i in xrange(1, len(params), 2):
         story += params[i - 1] + " " + params[i] + " "
 
-    return story + params[len(params) - 1]
+    if len(params) > 2:
+        return story + params[len(params) - 1]
+    else:
+        return story
 
 def similarity_score(seq1, seq2):
     '''
@@ -85,10 +89,12 @@ def best_match(genome, seq):
     '''
 
     best_match = 0
+    max_score = 0
 
     for i in range(0, len(genome)):
-        score = similatiry_score(genome[i:len(seq) + 1], seq)
-        if score > best_match:
+        score = similarity_score(genome[i:len(seq) + i], seq)
+        if score > max_score:
+            max_score = score
             best_match = i
 
     return best_match
@@ -101,19 +107,19 @@ def calc_stats(list):
     '''
 
     median = 0
-    sum = 0
+    sum = 0.0
     list.sort()
     size = len(list)
 
     if size % 2:
         median = list[size / 2]
     else:
-        median = (list[size / 2] + list[(size / 2) - 1]) / 2
+        median = (float(list[size / 2]) + float(list[(size / 2) - 1])) / 2
 
     for value in list:
         sum += value
 
-    return [(sum / size), median]
+    return [float(sum / size), median]
 
 def parse_ratings(filename):
     '''
