@@ -1,0 +1,50 @@
+Project Description:
+
+  Multithreaded web crawler written in C++ with page ranking abilities designed for use in a search architecture.
+  This project utilizes curl as the primary method for downloading information fetched over the http and https protocol.
+  The main challenge faced in this project was dealing with finding new urls to crawl in the response body.
+  Regular expressions were used in order to find new urls. This is typically not a good idea because urls come in various formats
+  which make it hard to write a good matcher.
+  Crawled web pages are stored as files with the built in hash as a filename.
+
+Project Goals:
+
+  Personal:
+    - Implement a working web crawler in C++
+    - Store data for eventual searching
+    - Learn about web crawling technology through simplistic practice
+
+  General:
+    - Faster web crawling through a thread pool architecture
+    - Configurable to allow for different crawling scenarios (host whitelist, host blacklist)
+    - Save downloaded HTML content for later processing
+
+Class Descriptions:
+
+  Crawler - Main class for project, includes logic for scheduling pages to be crawled, crawling, and housekeeping tasks
+  ThreadPool - Class for managing the thread pool used for multithreaded crawling
+
+Data Member Descriptions:
+
+  unordered_set roots - root urls to start crawling from
+  unordered_set hostWhitelist - urls on the whitelist
+  unordered_set hostBlacklist - urls on the blacklist
+  unordered_set seenUrls - urls already crawled
+  queue crawlQueue - queue for urls to crawl next
+  ThreadPool pool - thread pool class object
+  atomic numPagesCrawled - atomic counter for number of pages crawled
+  string dataDirectory - directory where crawled pages reside
+  hash h - built in C++ hash function
+  vector workers - vector of worker threads
+  queue taskQueue - queue of functions
+  atomic_uint taskCount - number of tasks
+  mutex mutex - mutual exclusion for thread safe memory locking
+  condition_variable condition - thread conditional
+  atomic_bool stop - atomic stop boolean
+
+Design Requirement Satisfaction:
+
+  - 2 classes with dense functionality
+  - More than 2 classes that have more than 4 data members
+  - File IO for reading hostWhitelist and hostBlacklist, storing crawled pages
+  - Implementation includes various for and while loops
