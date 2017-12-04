@@ -56,7 +56,7 @@ def generate_story(params):
 
     return story + params[len(params) - 1]
 
-def similatiry_score(seq1, seq2):
+def similarity_score(seq1, seq2):
     '''
     Computes the similatiry score of two strings based on their edit distance from eachother
     params: seq1, seq2
@@ -146,7 +146,7 @@ def main():
     params = ["I went skiing at", "Enter a location:", "it was really crowded and I stayed in line for", "Enter number of hours:", "hours"]
     print generate_story(params)
 
-    print similatiry_score("ABCEABA", "ABCDABC")
+    print similarity_score("ABCEABA", "ABCDABC")
 
     print best_match("ABCABCGHC", "GHC")
 
