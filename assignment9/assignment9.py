@@ -1,4 +1,17 @@
+'''
+Author: David Skrenta CS1300 Fall 2017
+Recitation: 210 - Arcadia
+Assignment 9
+assignment9.py
+'''
+
 def compute_census(rates, population):
+    '''
+    Computes the current population after a year based on the rates provided
+    params: rates, population
+    returns: population
+    '''
+
     seconds_per_year = 31536000
 
     population += seconds_per_year / rates[0]
@@ -8,6 +21,10 @@ def compute_census(rates, population):
     return population
 
 def convert_seconds():
+    '''
+    Converts seconds to days, hours, minutes, seconds format based on seconds from user input
+    '''
+
     total_seconds = input("Enter the number of seconds you want to convert?")
 
     if total_seconds < 0:
@@ -23,6 +40,12 @@ def convert_seconds():
     print str(total_seconds) + " corresponds to: " + str(days) + " days, " + str(hours) + " hours, " + str(minutes) + " minutes, " + str(seconds) + " seconds."
 
 def generate_story(params):
+    '''
+    Generates a story based on a list of prompts and strings
+    params: params
+    returns: story
+    '''
+
     story = ""
 
     for i in xrange(1, len(params), 2):
@@ -34,6 +57,12 @@ def generate_story(params):
     return story + params[len(params) - 1]
 
 def similatiry_score(seq1, seq2):
+    '''
+    Computes the similatiry score of two strings based on their edit distance from eachother
+    params: seq1, seq2
+    returns: score
+    '''
+
     length1 = len(seq1)
     length2 = len(seq2)
 
@@ -46,19 +75,31 @@ def similatiry_score(seq1, seq2):
         if seq1[i] != seq2[i]:
             mismatches += 1
 
-    return (length1 - mismatches) / length2;
+    return (float(length1) - float(mismatches)) / float(length2);
 
 def best_match(genome, seq):
+    '''
+    Computes the best match for a string and a substring using similarity_score
+    params: genome, seq
+    returns: best match
+    '''
+
     best_match = 0
 
     for i in range(0, len(genome)):
-        score = similatiry_score(genome[pos:len(genome)])
+        score = similatiry_score(genome[i:len(seq) + 1], seq)
         if score > best_match:
-            best_match = score
+            best_match = i
 
     return best_match
 
 def calc_stats(list):
+    '''
+    Calculates the average and the median for a list
+    params: list
+    returns: average and median in list format
+    '''
+
     median = 0
     sum = 0
     list.sort()
@@ -75,6 +116,12 @@ def calc_stats(list):
     return [(sum / size), median]
 
 def parse_ratings(filename):
+    '''
+    Reads a ratings file and populates a list with the values
+    params: filename
+    returns: ratings
+    '''
+
     final_ratings = []
     file = open(filename, "r")
 
@@ -100,6 +147,8 @@ def main():
     print generate_story(params)
 
     print similatiry_score("ABCEABA", "ABCDABC")
+
+    print best_match("ABCABCGHC", "GHC")
 
     print calc_stats([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
