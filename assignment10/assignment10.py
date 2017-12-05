@@ -67,7 +67,7 @@ class Recommender:
                 values = line.rstrip().split(',')
                 self.books.append([values[1], values[0]])
                 
-            return books
+            return self.books
         except:
             return None
         
@@ -81,7 +81,7 @@ class Recommender:
                 values = line.rstrip().split(' ')
                 self.users[values[0]] = map(lambda rating: int(rating), values[1:])
                 
-            return users
+            return self.users
         except:
             return None
             
