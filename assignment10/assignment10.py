@@ -12,19 +12,31 @@ class Recommender:
         
     def read_books(self, file_name):
         self.books = []
-        file = open(file_name, 'r')
         
-        for line in file:
-            values = line.rstrip().split(',')
-            self.books.append([values[1], values[0]])
+        try:
+            file = open(file_name, 'r')
+            
+            for line in file:
+                values = line.rstrip().split(',')
+                self.books.append([values[1], values[0]])
+                
+            return books
+        except:
+            return None
         
     def read_users(self, user_file):
         self.users = {}
-        file = open(user_file, 'r')
         
-        for line in file:
-            values = line.rstrip().split(' ')
-            self.users[values[0]] = map(lambda rating: int(rating), values[1:])
+        try:
+            file = open(user_file, 'r')
+            
+            for line in file:
+                values = line.rstrip().split(' ')
+                self.users[values[0]] = map(lambda rating: int(rating), values[1:])
+                
+            return users
+        except:
+            return None
             
     def calc_avg_rating(self):
         self.avg_ratings = []
