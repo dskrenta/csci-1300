@@ -5,6 +5,53 @@ Assignment 10
 assignment10.py
 '''
 
+def read_books(file_name):
+    books = []
+    
+    try:
+        file = open(file_name, 'r')
+        
+        for line in file:
+            values = line.rstrip().split(',')
+            books.append([values[1], values[0]])
+            
+        return books
+    except:
+        return None
+    
+def read_users(user_file):
+    users = {}
+    
+    try:
+        file = open(user_file, 'r')
+        
+        for line in file:
+            values = line.rstrip().split(' ')
+            users[values[0]] = map(lambda rating: int(rating), values[1:])
+            
+        return users
+    except:
+        return None
+        
+def calc_avg_rating(ratings_dict):
+    avg_ratings = []
+    
+    for value in ratings_dict.iteritems():
+        sum = 0.0
+        count = 0
+        
+        for rating in value[1]:
+            if rating > 0:
+                sum += rating
+                count += 1
+                
+        avg_ratings.append(sum / count)  
+        
+    return avg_ratings  
+
+def lookup_avg_rating(index, book_dict, avg_ratings_dict):
+    return '(' + str(avg_ratings_dict[index]) + ')' + ' ' + books_dict[index][0] + ' by ' + books_dict[index][1]
+
 class Recommender:
     def __init__(self, books_filename, ratings_filename):
         self.read_books(books_filename)
