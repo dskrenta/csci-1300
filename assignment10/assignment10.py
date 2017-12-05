@@ -65,7 +65,15 @@ class Recommender:
         return user
         
     def recommend_books(self, current_user_id):
-        return 0
+        similar_user_id = self.get_most_similar_user(current_user_id)
+        recommend_list = []
+        
+        for i in range(0, len(self.users[similar_user_id])):
+            rating = self.users[similar_user_id][i]
+            if rating >= 3 and self.users[current_user_id][i] == 0:
+                recommend_list.append(self.lookup_avg_rating(i))
+        
+        return recommend_list
         
 def main():
     recommender = Recommender('book.txt', 'ratings.txt')
@@ -76,7 +84,9 @@ def main():
     
     # print recommender.calc_similarity('Ben', 'Moose')
     
-    print recommender.get_most_similar_user('Ben')
+    # print recommender.get_most_similar_user('Ben')
+    
+    print recommender.recommend_books('clipper')
 
 if __name__ == '__main__':
     main()
