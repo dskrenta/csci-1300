@@ -28,28 +28,55 @@ class Recommender:
             
     def calc_avg_rating(self):
         self.avg_ratings = []
+        
         for value in self.users.iteritems():
             sum = 0.0
             count = 0
+            
             for rating in value[1]:
                 if rating > 0:
                     sum += rating
                     count += 1
+                    
             self.avg_ratings.append(sum / count)    
     
     def lookup_avg_rating(self, index):
         return '(' + str(self.avg_ratings[index]) + ')' + ' ' + self.books[index][0] + ' by ' + self.books[index][1]
+    
+    def calc_similarity(self, user1, user2):
+        sum = 0.0
+        
+        for i in range(0, len(self.users[user1])):
+            sum += self.users[user1][i] * self.users[user2][i]
+            
+        return sum
+    
+    def get_most_similar_user(self, current_user_id):
+        max_similarity = 0.0
+        max_user_id = ''
+        
+        for user in self.users:
+            if user != current_user_id:
+                similarity = self.calc_similarity(current_user_id, user)
+                if similarity > max_similarity:
+                    max_similarity = similarity
+                    max_user_id = user
+        
+        return user
+        
+    def recommend_books(self, current_user_id):
+        return 0
         
 def main():
     recommender = Recommender('book.txt', 'ratings.txt')
-    
-    # print recommender.books
-    # print recommender.users
-    
+        
     recommender.calc_avg_rating() 
     
-    # print recommender.avg_ratings
-    print recommender.lookup_avg_rating(5)
+    # print recommender.lookup_avg_rating(5)
+    
+    # print recommender.calc_similarity('Ben', 'Moose')
+    
+    print recommender.get_most_similar_user('Ben')
 
 if __name__ == '__main__':
     main()
