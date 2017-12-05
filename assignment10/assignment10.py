@@ -62,7 +62,7 @@ class Recommender:
                     max_similarity = similarity
                     max_user_id = user
         
-        return user
+        return max_user_id
         
     def recommend_books(self, current_user_id):
         similar_user_id = self.get_most_similar_user(current_user_id)
