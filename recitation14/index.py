@@ -9,8 +9,10 @@ class Average:
                 values = line.rstrip().split(' ')
                 sum = 0.0
                 for i in range(1, len(values)):
+                    print values[i], i, len(values)
                     sum += int(values[i])
-                self.dict_of_average[values[0]] = sum / len(values) - 1
+                print sum
+                self.dict_of_average[values[0]] = sum / (len(values) - 1)
         except:
             return None
 
