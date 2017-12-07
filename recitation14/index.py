@@ -16,22 +16,6 @@ class Average:
         except:
             return None
 
-    '''
-    def load_dictionary(self, filename):
-        try:
-            file = open(filename, 'r')
-            for line in file:
-                values = line.strip().split(' ')
-                sum = 0
-                for i in range(1, len(values)):
-                    sum += values[i]
-                self.dict_of_average[values[0]] = sum / len(values) - 1
-            file.close()
-            return self.dict_of_average
-        except:
-            return None
-    '''
-
     def highestAverage(self):
         max = 0.0
         max_key = ''
@@ -39,7 +23,7 @@ class Average:
             if self.dict_of_average[key] > max:
                 max_key = key
                 max = self.dict_of_average[key]
-        print max_key + ', Average: ' + str(max)
+        print 'Name: ' + max_key + ', Average: ' + str(max)
 
 def main():
     a1 = Average();
