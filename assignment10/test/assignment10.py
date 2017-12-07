@@ -1,10 +1,3 @@
-'''
-Author: David Skrenta CS1300 Fall 2017
-Recitation: 210 - Arcadia
-Assignment 10
-assignment10.py
-'''
-
 def read_books(file_name):
     books = []
 
@@ -33,7 +26,7 @@ def read_users(user_file):
     except:
         return None
 
-def calc_avg_rating(ratings_dict):
+def calculate_average_rating(ratings_dict):
     avg_ratings = []
 
     for value in ratings_dict.iteritems():
@@ -49,10 +42,9 @@ def calc_avg_rating(ratings_dict):
 
     return avg_ratings
 
-def lookup_avg_rating(index, book_dict, avg_ratings_dict):
-    return '(' + str(avg_ratings_dict[index]) + ')' + ' ' + books_dict[index][0] + ' by ' + books_dict[index][1]
+def lookup_average_rating(index, book_dict, avg_ratings_dict):
+    return '(' + str(avg_ratings_dict[index]) + ')' + ' ' + book_dict[index][0] + ' by ' + book_dict[index][1]
 
-'''
 class Recommender:
     def __init__(self, books_filename, ratings_filename):
         self.read_books(books_filename)
@@ -86,7 +78,7 @@ class Recommender:
         except:
             return None
 
-    def calc_avg_rating(self):
+    def calculate_average_rating(self):
         self.avg_ratings = []
 
         for value in self.users.iteritems():
@@ -100,7 +92,7 @@ class Recommender:
 
             self.avg_ratings.append(sum / count)
 
-    def lookup_avg_rating(self, index):
+    def lookup_average_rating(self, index):
         return '(' + str(self.avg_ratings[index]) + ')' + ' ' + self.books[index][0] + ' by ' + self.books[index][1]
 
     def calc_similarity(self, user1, user2):
@@ -134,20 +126,9 @@ class Recommender:
                 recommend_list.append(self.lookup_avg_rating(i))
 
         return recommend_list
-'''
 
 def main():
-    recommender = Recommender('book.txt', 'ratings.txt')
-
-    recommender.calc_avg_rating()
-
-    # print recommender.lookup_avg_rating(5)
-
-    # print recommender.calc_similarity('Ben', 'Moose')
-
-    # print recommender.get_most_similar_user('Ben')
-
-    # print recommender.recommend_books('clipper')
+    print "Hello, world"
 
 if __name__ == '__main__':
     main()
