@@ -27,140 +27,99 @@ def read_users(user_file):
 
         for line in file:
             values = line.rstrip().split(' ')
-            users[values[0]] = map(lambda rating: int(rating), values[1:])
+            users[values[0]] = map(lambda rating: float(rating), values[1:])
 
         return users
     except:
         return None
 
-def calc_avg_rating(ratings_dict):
-    avg_ratings = []
+def calculate_average_rating(ratings_dict):
+    average_rating_list = []
+    totals_list = [0] * 55
+    counts_list = [0] * 55
 
-    for value in ratings_dict.iteritems():
-        sum = 0.0
-        count = 0
+    for user in ratings_dict:
+        index = 0
 
-        for rating in value[1]:
-            if rating > 0:
-                sum += rating
-                count += 1
+        for rating in ratings_dict[user]:
+            if rating != 0:
+                totals_list[index] += rating
+                counts_list[index] += 1
+            index += 1
 
-        avg_ratings.append(sum / count)
+    for i in range(0, len(totals_list)):
+        average_rating_list.append(totals_list[i] / counts_list[i])
 
-    return avg_ratings
+    return average_rating_list
 
-def lookup_avg_rating(index, book_dict, avg_ratings_dict):
-    return '(' + str(avg_ratings_dict[index]) + ')' + ' ' + books_dict[index][0] + ' by ' + books_dict[index][1]
 
-'''
+def lookup_average_rating(index, book_dict, avg_ratings_dict):
+    return '(' + '{0:.2f}'.format(avg_ratings_dict[index]) + ')' + ' ' + book_dict[index][0] + ' by ' + book_dict[index][1]
+
 class Recommender:
     def __init__(self, books_filename, ratings_filename):
-<<<<<<< HEAD
-        self.book_list = self.read_books(books_filename)
-        self.user_dictionary = self.read_users(ratings_filename)
+        self.book_list = []
+        self.user_dictionary = {}
         self.average_rating_list = []
 
-    def read_books(self, file_name):
-        books = []
-=======
         self.read_books(books_filename)
         self.read_users(ratings_filename)
+        self.calculate_average_rating()
 
     def read_books(self, file_name):
-        self.books = []
->>>>>>> 268b3d9ac98aabd859312690ab72e2fe2e1506d8
-
         try:
             file = open(file_name, 'r')
 
             for line in file:
                 values = line.rstrip().split(',')
-<<<<<<< HEAD
-                books.append([values[1], values[0]])
-
-            return books
-=======
-                self.books.append([values[1], values[0]])
-
-            return self.books
->>>>>>> 268b3d9ac98aabd859312690ab72e2fe2e1506d8
+                self.book_list.append([values[1], values[0]])
         except:
             return None
 
     def read_users(self, user_file):
-<<<<<<< HEAD
         users = {}
-=======
-        self.users = {}
->>>>>>> 268b3d9ac98aabd859312690ab72e2fe2e1506d8
 
         try:
             file = open(user_file, 'r')
 
             for line in file:
                 values = line.rstrip().split(' ')
-<<<<<<< HEAD
-                users[values[0]] = map(lambda rating: int(rating), values[1:])
-
-            return users
-=======
-                self.users[values[0]] = map(lambda rating: int(rating), values[1:])
-
-            return self.users
->>>>>>> 268b3d9ac98aabd859312690ab72e2fe2e1506d8
+                self.user_dictionary[values[0]] = map(lambda rating: float(rating), values[1:])
         except:
             return None
 
-    def calc_avg_rating(self):
-<<<<<<< HEAD
-        for value in self.user_dictionary.iteritems():
-=======
-        self.avg_ratings = []
+    def calculate_average_rating(self):
+        totals_list = [0] * 55
+        counts_list = [0] * 55
 
-        for value in self.users.iteritems():
->>>>>>> 268b3d9ac98aabd859312690ab72e2fe2e1506d8
-            sum = 0.0
-            count = 0
+        for user in self.user_dictionary:
+            index = 0
 
-            for rating in value[1]:
-                if rating > 0:
-                    sum += rating
-                    count += 1
+            for rating in self.user_dictionary[user]:
+                if rating != 0:
+                    totals_list[index] += rating
+                    counts_list[index] += 1
+                index += 1
 
-<<<<<<< HEAD
-            self.average_rating_list.append(sum / count)
+        for i in range(0, len(totals_list)):
+            self.average_rating_list.append(totals_list[i] / counts_list[i])
 
-    def lookup_avg_rating(self, index):
-        return '(' + str(self.average_rating_list[index]) + ')' + ' ' + self.book_list[index][0] + ' by ' + self.book_list[index][1]
-=======
-            self.avg_ratings.append(sum / count)
-
-    def lookup_avg_rating(self, index):
-        return '(' + str(self.avg_ratings[index]) + ')' + ' ' + self.books[index][0] + ' by ' + self.books[index][1]
->>>>>>> 268b3d9ac98aabd859312690ab72e2fe2e1506d8
+    def lookup_average_rating(self, index):
+        return '(' + '{0:.2f}'.format(self.average_rating_list[index]) + ')' + ' ' + self.book_list[index][0] + ' by ' + self.book_list[index][1]
 
     def calc_similarity(self, user1, user2):
         sum = 0.0
 
-<<<<<<< HEAD
         for i in range(0, len(self.user_dictionary[user1])):
             sum += self.user_dictionary[user1][i] * self.user_dictionary[user2][i]
-=======
-        for i in range(0, len(self.users[user1])):
-            sum += self.users[user1][i] * self.users[user2][i]
->>>>>>> 268b3d9ac98aabd859312690ab72e2fe2e1506d8
 
-        return sum
+        return int(sum)
 
     def get_most_similar_user(self, current_user_id):
         max_similarity = 0.0
         max_user_id = ''
 
-<<<<<<< HEAD
         for user in self.user_dictionary:
-=======
-        for user in self.users:
->>>>>>> 268b3d9ac98aabd859312690ab72e2fe2e1506d8
             if user != current_user_id:
                 similarity = self.calc_similarity(current_user_id, user)
                 if similarity > max_similarity:
@@ -173,39 +132,77 @@ class Recommender:
         similar_user_id = self.get_most_similar_user(current_user_id)
         recommend_list = []
 
-<<<<<<< HEAD
         for i in range(0, len(self.user_dictionary[similar_user_id])):
             rating = self.user_dictionary[similar_user_id][i]
             if rating >= 3 and self.user_dictionary[current_user_id][i] == 0:
-                recommend_list.append(self.lookup_avg_rating(i))
+                recommend_list.append(self.lookup_average_rating(i))
 
         return recommend_list
-=======
-        for i in range(0, len(self.users[similar_user_id])):
-            rating = self.users[similar_user_id][i]
-            if rating >= 3 and self.users[current_user_id][i] == 0:
-                recommend_list.append(self.lookup_avg_rating(i))
-
-        return recommend_list
-'''
->>>>>>> 268b3d9ac98aabd859312690ab72e2fe2e1506d8
 
 def main():
-    recommender = Recommender('book.txt', 'ratings.txt')
+    book_list = read_books("../book.txt")
+    user_dict = read_users("../ratings.txt")
 
-    recommender.calc_avg_rating()
+    ### Test case for the part 1
+    ave_rating_list = calculate_average_rating(user_dict)
+    print round(ave_rating_list[0], 3) 	# 3.833
+    print ave_rating_list[20]  		# 0.5
+    print lookup_average_rating(0, book_list, ave_rating_list)
+    # (3.83) The Hitchhiker's Guide To The Galaxy by Douglas Adams
 
-    # print recommender.lookup_avg_rating(5)
 
-    # print recommender.calc_similarity('Ben', 'Moose')
+    ### Test case for part 2
+    r = Recommender("../book.txt", "../ratings.txt")
 
-    # print recommender.get_most_similar_user('Ben')
+    #### calc_similarity function:
+    print r.calc_similarity('Cust8', 'Shannon')      # 369
+    print r.calc_similarity('Megan', 'Strongbad')    # 95
+    print r.calc_similarity('Leah', 'clipper')       # 0
+    print r.calc_similarity('Apollo', 'James')       # -65
 
-<<<<<<< HEAD
-    print recommender.recommend_books('clipper')
-=======
-    # print recommender.recommend_books('clipper')
->>>>>>> 268b3d9ac98aabd859312690ab72e2fe2e1506d8
+    #### lookup_average_rating function
+    print r.lookup_average_rating(0)            # (3.83) The Hitchhiker's Guide To The Galaxy by Douglas Adams
+    print r.lookup_average_rating(7)            # (0.43) The Sisterhood of the Travelling Pants by Ann Brashares
+    print r.lookup_average_rating(17)           # (2.38) Neuromancer by William Gibson
+    print r.lookup_average_rating(30)           # (1.77) To Kill a Mockingbird by Harper Lee
+    print r.lookup_average_rating(54)  	    # (1.56) The Chrysalids by John Wyndham
+    print r.lookup_average_rating(10)  	    #(0.90) The Princess Diaries by Meg Cabot
+    # -> it should be (0.90), NOT (0.9)
+
+    #### get_most_similar_user
+    print r.get_most_similar_user("Leah")       # hidan
+    print r.get_most_similar_user("Rudy_Ann")   # ROFLOL
+    print r.get_most_similar_user("Martin")     # clipper
+    print r.get_most_similar_user("KeeLed")     # Cust8
+    print r.get_most_similar_user("Rudy.A")     # Cust8
+
+
+    #### recommend_books
+    print r.recommend_books("Brian")
+    # []
+    print r.recommend_books("Megan")
+    # ['(0.90) The Princess Diaries by Meg Cabot',
+    #  "(3.80) My Sister's Keeper by Jodi Picoult",
+    #  '(2.06) Bone Series by Jeff Smith']
+    print r.recommend_books("Tiffany")
+    # ['(3.86) The Bourne Series by Robert Ludlum']
+    print r.recommend_books("Moose")
+    # ['(3.50) The Princess Bride by William Goldman',
+    #  '(3.86) The Bourne Series by Robert Ludlum',
+    #  '(0.47) Twilight Series by Stephenie Meyer',
+    #  '(2.76) The Golden Compass by Philip Pullman',
+    #  '(3.57) Holes by Louis Sachar']
+    print r.recommend_books("Ella")
+    # ["(3.83) The Hitchhiker's Guide To The Galaxy by Douglas Adams",
+    #  '(2.25) The Da Vinci Code by Dan Brown',
+    #  '(1.62) Naruto by Masashi Kishimoto',
+    #  '(3.86) The Bourne Series by Robert Ludlum',
+    #  "(3.80) My Sister's Keeper by Jodi Picoult",
+    #  '(3.61) Harry Potter Series by J.K. Rowling',
+    #  '(2.06) Bone Series by Jeff Smith',
+    #  '(3.04) The Lord of the Rings by J R R Tolkien',
+    #  '(2.85) The Hobbit by J R R Tolkien',
+    #  '(2.83) The War Of The Worlds by H G Wells']
 
 if __name__ == '__main__':
     main()
