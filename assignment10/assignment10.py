@@ -6,6 +6,7 @@ assignment10.py
 '''
 
 def read_books(file_name):
+    '''Reads book information from book file and returns book list'''
     books = []
 
     try:
@@ -20,6 +21,7 @@ def read_books(file_name):
         return None
 
 def read_users(user_file):
+    '''Reads user information from user file and returns user dictionary'''
     users = {}
 
     try:
@@ -34,6 +36,7 @@ def read_users(user_file):
         return None
 
 def calculate_average_rating(ratings_dict):
+    '''Calculates average ratings for books contained in user dictionary and returns average ratings list'''
     average_rating_list = []
     totals_list = [0] * 55
     counts_list = [0] * 55
@@ -52,8 +55,8 @@ def calculate_average_rating(ratings_dict):
 
     return average_rating_list
 
-
 def lookup_average_rating(index, book_dict, avg_ratings_dict):
+    '''Returns a formatted string with average rating and book information'''
     return '(' + '{0:.2f}'.format(avg_ratings_dict[index]) + ')' + ' ' + book_dict[index][0] + ' by ' + book_dict[index][1]
 
 class Recommender:
@@ -67,6 +70,7 @@ class Recommender:
         self.calculate_average_rating()
 
     def read_books(self, file_name):
+        '''Reads books into book list'''
         try:
             file = open(file_name, 'r')
 
@@ -77,8 +81,7 @@ class Recommender:
             return None
 
     def read_users(self, user_file):
-        users = {}
-
+        '''Reads users from user file'''
         try:
             file = open(user_file, 'r')
 
@@ -89,6 +92,7 @@ class Recommender:
             return None
 
     def calculate_average_rating(self):
+        '''Calculates average ratings for books contained in user dictionary'''
         totals_list = [0] * 55
         counts_list = [0] * 55
 
@@ -105,9 +109,11 @@ class Recommender:
             self.average_rating_list.append(totals_list[i] / counts_list[i])
 
     def lookup_average_rating(self, index):
+        '''Returns a formatted string with average rating and book information'''
         return '(' + '{0:.2f}'.format(self.average_rating_list[index]) + ')' + ' ' + self.book_list[index][0] + ' by ' + self.book_list[index][1]
 
     def calc_similarity(self, user1, user2):
+        '''Calculates similarity between 2 input users'''
         sum = 0.0
 
         for i in range(0, len(self.user_dictionary[user1])):
@@ -116,6 +122,7 @@ class Recommender:
         return int(sum)
 
     def get_most_similar_user(self, current_user_id):
+        '''Returns most similar user based similarity score function'''
         max_similarity = 0.0
         max_user_id = ''
 
@@ -129,6 +136,7 @@ class Recommender:
         return max_user_id
 
     def recommend_books(self, current_user_id):
+        '''Recommends a list of books based on similar used to given user'''
         similar_user_id = self.get_most_similar_user(current_user_id)
         recommend_list = []
 
@@ -140,8 +148,8 @@ class Recommender:
         return recommend_list
 
 def main():
-    book_list = read_books("../book.txt")
-    user_dict = read_users("../ratings.txt")
+    book_list = read_books("book.txt")
+    user_dict = read_users("ratings.txt")
 
     ### Test case for the part 1
     ave_rating_list = calculate_average_rating(user_dict)
@@ -152,7 +160,7 @@ def main():
 
 
     ### Test case for part 2
-    r = Recommender("../book.txt", "../ratings.txt")
+    r = Recommender("book.txt", "ratings.txt")
 
     #### calc_similarity function:
     print r.calc_similarity('Cust8', 'Shannon')      # 369
